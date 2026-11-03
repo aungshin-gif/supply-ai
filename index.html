@@ -216,17 +216,36 @@
   .panel { background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:26px; padding:22px; margin-top:22px; box-shadow:var(--shadow); }
   .ph { margin:0 0 16px; font-size:clamp(20px,4.6vw,27px); }
   .ph i { color:#2563eb; font-style:italic; font-weight:900; letter-spacing:-2px; margin-left:4px; }
-  .hw { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:10px; align-items:stretch; }
-  .hw-c { background:linear-gradient(180deg,#f4f8ff,#edf3ff); border:1px solid var(--line); border-radius:20px; padding:16px; }
-  .hw-c b { display:block; margin-top:12px; font-size:16px; line-height:1.3; }
-  .hw-c p { margin:4px 0 0; color:var(--mute); font-size:14px; }
-  .hw-i { position:relative; width:56px; height:56px; }
-  .hw-i .ic { width:56px; height:56px; border-radius:16px; display:grid; place-items:center; background:linear-gradient(180deg,#4f9bff,#1d4ed8); box-shadow:0 4px 0 #1a3f9e, 0 10px 16px rgba(37,99,235,.3); }
-  .hw-i .ic svg { width:28px; height:28px; }
-  .hw-i em { position:absolute; right:-8px; top:-8px; width:26px; height:26px; border-radius:50%; background:#1d4ed8; color:#fff; font-style:normal; font-weight:800; font-size:13px; display:grid; place-items:center; border:2px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.2); }
-  .hw-a { align-self:center; color:#7aa2e8; display:grid; place-items:center; } .hw-a svg { width:26px; height:26px; }
-  @media (max-width:720px) { .hw { grid-template-columns:1fr; } .hw-a { display:none; } .hw-c { display:grid; grid-template-columns:56px 1fr; column-gap:14px; row-gap:2px; align-items:center; }
-    .hw-c .hw-i { grid-row:1 / 3; } .hw-c b { margin:0; } }
+  /* How it works: 3D tiles */
+  .hw { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:12px; align-items:stretch; perspective:900px; }
+  .hw-c { --c1:#6aa8ff; --c2:#1d4ed8; --d:#173e9a; --sh:rgba(37,99,235,.38); position:relative; text-align:center; padding:22px 16px 18px;
+    background:linear-gradient(160deg,#fff 0%,#eef4ff 58%,#e2ebff 100%); border:1px solid #d9e5fb; border-radius:24px;
+    box-shadow:inset 0 1px 0 #fff, 0 3px 0 #cddaf6, 0 16px 30px rgba(37,99,235,.12); transition:transform .35s ease, box-shadow .35s ease; transform-style:preserve-3d; }
+  .hw-c.s2 { --c1:#b793ff; --c2:#6d3fe0; --d:#4b2aa8; --sh:rgba(109,63,224,.38); }
+  .hw-c.s3 { --c1:#52e3a4; --c2:#0f9d6a; --d:#0a7350; --sh:rgba(15,157,106,.38); }
+  .hw-c:hover { transform:translateY(-5px) rotateX(5deg) rotateY(-5deg); box-shadow:inset 0 1px 0 #fff, 0 3px 0 #cddaf6, 0 26px 40px rgba(37,99,235,.2); }
+  .hw-c b { display:block; margin-top:26px; font-size:16px; line-height:1.3; }
+  .hw-c p { margin:5px 0 0; color:var(--mute); font-size:14px; }
+  .hw-i { position:relative; width:76px; height:76px; margin:0 auto; }
+  .hw-i::after { content:""; position:absolute; left:50%; bottom:-20px; width:62px; height:12px; transform:translateX(-50%); background:radial-gradient(ellipse at center,var(--sh),transparent 70%); filter:blur(2px); }
+  .hw-i .ic { position:relative; z-index:1; width:76px; height:76px; border-radius:24px; display:grid; place-items:center; color:var(--c2);
+    background:linear-gradient(150deg,var(--c1),var(--c2));
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.55), inset 0 -9px 14px rgba(0,0,0,.2), 0 6px 0 var(--d), 0 12px 18px var(--sh);
+    animation:hwFloat 3.8s ease-in-out infinite; }
+  .hw-c.s2 .ic { animation-delay:-1.2s; } .hw-c.s3 .ic { animation-delay:-2.4s; }
+  .hw-i .ic::before { content:""; position:absolute; left:7px; right:7px; top:5px; height:30px; border-radius:18px 18px 40px 40px; background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,0)); pointer-events:none; }
+  .hw-i .ic svg { position:relative; width:42px; height:42px; filter:drop-shadow(0 3px 2px rgba(0,0,0,.28)); }
+  .hw-i em { position:absolute; z-index:2; right:-12px; top:-12px; width:30px; height:30px; border-radius:50%; color:#fff; font-style:normal; font-weight:800; font-size:14px; display:grid; place-items:center;
+    background:radial-gradient(circle at 32% 26%,var(--c1),var(--c2) 78%); border:2px solid #fff; box-shadow:0 3px 0 var(--d), 0 6px 10px var(--sh); text-shadow:0 1px 1px rgba(0,0,0,.3); }
+  .hw-a { align-self:center; display:grid; place-items:center; width:36px; height:36px; border-radius:50%; color:#2563eb; background:linear-gradient(180deg,#fff,#e6eefc); box-shadow:inset 0 1px 0 #fff, 0 3px 0 #c5d4f3, 0 8px 12px rgba(37,99,235,.18); }
+  .hw-a svg { width:18px; height:18px; }
+  @keyframes hwFloat { 0%,100% { transform:translateY(0) rotate(-1.5deg); } 50% { transform:translateY(-6px) rotate(1.5deg); } }
+  @media (prefers-reduced-motion:reduce) { .hw-i .ic { animation:none; } .hw-c { transition:none; } .hw-c:hover { transform:none; } }
+  @media (max-width:720px) { .hw { grid-template-columns:1fr; gap:14px; perspective:none; } .hw-a { display:none; }
+    .hw-c { display:grid; grid-template-columns:64px 1fr; column-gap:18px; row-gap:2px; align-items:center; text-align:left; padding:16px; }
+    .hw-c:hover { transform:none; } .hw-c .hw-i { grid-row:1 / 3; width:64px; height:64px; } .hw-c .hw-i::after { width:50px; bottom:-16px; }
+    .hw-i .ic { width:64px; height:64px; border-radius:20px; } .hw-i .ic svg { width:34px; height:34px; } .hw-i .ic::before { height:24px; left:6px; right:6px; }
+    .hw-i em { width:26px; height:26px; font-size:13px; right:-10px; top:-10px; } .hw-c b { margin:0; } }
   .nd { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   @media (max-width:720px) { .nd { grid-template-columns:1fr; } .nd-c { gap:11px; padding:12px; } .nd-c .lg { width:46px; height:46px; border-radius:14px; } .nd-c .lg img { width:28px; height:28px; } .nd-c > svg { display:none; } .nd-c p { font-size:13px; } .panel { padding:18px 16px; } }
   .nd-c { display:flex; align-items:center; gap:14px; padding:14px; border-radius:20px; border:1px solid var(--line); transition:transform .2s, box-shadow .2s; }
@@ -730,11 +749,11 @@
   <section class="panel reveal" id="guide">
     <h2 class="ph"><span data-i="howT"></span> <i>//</i></h2>
     <div class="hw">
-      <div class="hw-c"><div class="hw-i"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4" fill="none" stroke="#fff" stroke-width="2.200"/><path d="m11 12 9-9m-3 3 3 3" fill="none" stroke="#fff" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg></span><em>1</em></div><b data-i="h1t"></b><p data-i="h1d"></p></div>
-      <span class="hw-a"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <div class="hw-c"><div class="hw-i"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M4 21c0-4.500 3.600-7 8-7s8 2.500 8 7z" fill="#fff"/></svg></span><em>2</em></div><b data-i="h2t"></b><p data-i="h2d"></p></div>
-      <span class="hw-a"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <div class="hw-c"><div class="hw-i"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.500" y="3.500" width="17" height="17" rx="4" fill="none" stroke="#fff" stroke-width="2.200"/><path d="m8 12.200 2.800 2.800 5.200-5.600" fill="none" stroke="#fff" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"/></svg></span><em>3</em></div><b data-i="h3t"></b><p data-i="h3d"></p></div>
+      <div class="hw-c s1"><div class="hw-i"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15.5" r="4.6" fill="none" stroke="#fff" stroke-width="3.2"/><path d="m11.8 11.7 8-8M16.6 6.9l2.6 2.6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><em>1</em></div><b data-i="h1t"></b><p data-i="h1d"></p></div>
+      <span class="hw-a"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div class="hw-c s2"><div class="hw-i"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.6" r="4.4" fill="#fff"/><path d="M3.6 21.2c0-4.7 3.7-7.4 8.4-7.4s8.4 2.7 8.4 7.4z" fill="#fff"/></svg></span><em>2</em></div><b data-i="h2t"></b><p data-i="h2d"></p></div>
+      <span class="hw-a"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div class="hw-c s3"><div class="hw-i"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.6" fill="#fff"/><path d="m7.6 12.4 3.2 3.2 5.8-6.4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><em>3</em></div><b data-i="h3t"></b><p data-i="h3d"></p></div>
     </div>
     <div class="vid hidden" id="vidBox">
       <button type="button" class="vid-play" id="vidPlay" aria-label="Play tutorial">
