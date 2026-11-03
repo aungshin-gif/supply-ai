@@ -1016,7 +1016,7 @@
 /* Our own API. The browser only ever sees these neutral paths (/api/v1/check,
    /api/v1/redeem, /api/v1/order/:token); the relay on the VPS maps them to the
    real supplier. No supplier name or host is exposed to the browser. */
-const BASE = 'https://app.gamepayhub.shop/api/v1';
+const BASE = 'https://redeem.gamepayhub.shop/api/v1';
 /* Support contacts. Add the WhatsApp number (digits only, with country code, e.g. '959123456789') to show its button. */
 const SUPPORT = { telegram:'angsthtun', whatsapp:'' };
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -2434,7 +2434,7 @@ try { const lt = localStorage.getItem('lastToken'); if (lt) $('oldTok').value = 
    The browser never talks to the supplier. It talks to YOUR relay (on the VPS),
    which holds the API key. Set C2_API_BASE once the relay is live, e.g.
    'https://relay.example.com/api/v1/c2'.  While it is empty, ChatGPT keys show "being set up". */
-const C2_API_BASE = 'https://app.gamepayhub.shop/api/v1/c2';
+const C2_API_BASE = 'https://redeem.gamepayhub.shop/api/v1/c2';
 const C2_RE = /^(BP|PRO5|PRO20|PROMAX|GO)-/i;
 const PLAN_NAMES = { plus:'Plus', pro5:'Pro 5x', pro20:'Pro 20x', promax:'Pro Max', go:'Go' };
 
