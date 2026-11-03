@@ -295,28 +295,34 @@
   .pstage::before { content:""; position:absolute; width:360px; height:360px; left:-120px; top:-120px; border-radius:50%; background:radial-gradient(circle,rgba(96,165,250,.22),transparent 68%); }
   .pstage::after { display:none; }
   .pstage > * { position:relative; z-index:1; }
-  .ptags { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; padding:12px 4px 10px; }
-  .ptag { position:relative; min-height:176px; border-radius:28px; isolation:isolate; overflow:hidden; transition:transform .3s, box-shadow .3s;
-          background:linear-gradient(150deg,rgba(255,255,255,.88),rgba(255,255,255,.46)); border:1px solid rgba(255,255,255,.95);
-          box-shadow:0 18px 40px rgba(60,90,160,.16), 0 2px 6px rgba(60,90,160,.08), inset 0 1px 0 #fff; }
-  .ptag:hover { transform:translateY(-6px); box-shadow:0 26px 48px rgba(60,90,160,.2), 0 2px 6px rgba(60,90,160,.08), inset 0 1px 0 #fff; }
-  .ptag .o { position:absolute; border-radius:50%; z-index:-1; }
-  .ptag .o1 { width:170px; height:170px; right:-50px; top:-60px; background:var(--o1); opacity:.30; filter:blur(26px); }
-  .ptag .o2 { display:none; }
-  .ptag::before { content:""; position:absolute; left:8%; right:8%; top:0; height:46%; border-radius:0 0 60% 60%/0 0 100% 100%; background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,0)); pointer-events:none; }
-  .ptag .gf { position:absolute; inset:0; padding:16px 18px; display:flex; flex-direction:column; justify-content:space-between; color:#14213f; z-index:1; }
+  .ptags { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; padding:12px 4px 10px; }
+  /* Gift-card look: landscape card ratio, brand-colour gradient, glossy sweep, embossed "card number" dots */
+  .ptag { position:relative; aspect-ratio:1.58/1; min-height:172px; border-radius:22px; isolation:isolate; overflow:hidden;
+          transition:transform .3s cubic-bezier(.2,1,.3,1), box-shadow .3s; cursor:default;
+          background:linear-gradient(135deg,var(--c1),var(--c2) 72%); box-shadow:0 16px 32px -6px var(--cshadow), 0 2px 5px rgba(10,20,40,.18), inset 0 1px 0 rgba(255,255,255,.35); }
+  .ptag:hover { transform:translateY(-6px) scale(1.015); box-shadow:0 24px 42px -6px var(--cshadow), 0 3px 8px rgba(10,20,40,.2), inset 0 1px 0 rgba(255,255,255,.4); }
+  .ptag .o { display:none; }
+  /* diagonal glossy sheen sweeping the card */
+  .ptag::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:linear-gradient(115deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,0) 26%,rgba(255,255,255,0) 60%,rgba(255,255,255,.14) 78%,rgba(255,255,255,0) 100%); }
+  /* faint card-reader stripe + corner halo for a physical-card feel */
+  .ptag::after { content:""; position:absolute; right:-30px; bottom:-34px; width:130px; height:130px; border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.22),transparent 70%); z-index:0; pointer-events:none; }
+  .ptag .gf { position:relative; inset:0; padding:14px 16px 13px; height:100%; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; color:#fff; z-index:1; }
   .ptag .top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
-  .ptag .tl { width:46px; height:46px; border-radius:15px; background:#fff; display:grid; place-items:center; flex:none; box-shadow:0 6px 14px rgba(60,90,160,.14), inset 0 1px 0 #fff; font-weight:900; font-size:20px; color:#14213f; position:relative; }
-  .ptag .tl img { width:30px; height:30px; object-fit:contain; border-radius:6px; position:absolute; }
-  .ptag small { padding:4px 12px; border-radius:999px; background:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.95); box-shadow:0 2px 6px rgba(60,90,160,.08); font-weight:800; font-size:12px; color:#3b4a6b; }
-  .ptag b { display:block; font-size:18px; letter-spacing:.2px; }
-  .ptag .div { border-top:1.5px dashed rgba(60,90,160,.2); margin:6px -4px 0; }
+  .ptag .tl { width:38px; height:38px; border-radius:11px; background:rgba(255,255,255,.95); display:grid; place-items:center; flex:none; box-shadow:0 4px 10px rgba(10,20,40,.18); font-weight:900; font-size:17px; color:#14213f; position:relative; }
+  .ptag .tl img { width:24px; height:24px; object-fit:contain; border-radius:5px; position:absolute; }
+  .ptag small { padding:4px 11px; border-radius:999px; background:rgba(255,255,255,.22); border:1px solid rgba(255,255,255,.4); backdrop-filter:blur(2px); font-weight:800; font-size:10.5px; letter-spacing:.3px; color:#fff; text-transform:uppercase; }
+  .ptag b { display:block; font-size:15.5px; font-weight:800; letter-spacing:.2px; text-shadow:0 1px 2px rgba(0,0,0,.12); }
+  .ptag .num { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:13px; letter-spacing:3px; color:rgba(255,255,255,.55); font-weight:700; margin:0; user-select:none; }
   .ptag .bot { display:flex; align-items:flex-end; justify-content:space-between; gap:8px; }
-  .ptag .amt { display:flex; align-items:baseline; gap:6px; }
-  .ptag .amt strong { font-size:clamp(24px,3.2vw,32px); font-weight:900; line-height:1; color:#14213f; }
-  .ptag .amt em { font-style:normal; font-weight:800; font-size:14px; color:#5b6b8f; }
-  .ptag .gift { width:30px; height:30px; color:#7a8bb0; flex:none; }
-  .ptag.t-chatgpt { --o1:#34d399; } .ptag.t-claude { --o1:#fb923c; } .ptag.t-gemini { --o1:#818cf8; }
+  .ptag .amt { display:flex; align-items:baseline; gap:5px; }
+  .ptag .amt strong { font-size:clamp(20px,2.8vw,26px); font-weight:900; line-height:1; text-shadow:0 1px 3px rgba(0,0,0,.15); }
+  .ptag .amt em { font-style:normal; font-weight:800; font-size:12.5px; opacity:.85; }
+  .ptag .gift { width:22px; height:22px; color:#fff; opacity:.8; flex:none; }
+  .ptag.t-chatgpt { --c1:#15d8a5; --c2:#0a6e57; --cshadow:rgba(16,163,127,.4); }
+  .ptag.t-claude  { --c1:#ee8a63; --c2:#a8431f; --cshadow:rgba(217,119,87,.4); }
+  .ptag.t-gemini  { --c1:#8b93ff; --c2:#5b3fd6; --cshadow:rgba(99,91,241,.4); }
   @media (max-width:720px) { .ptags { grid-template-columns:minmax(0,1fr); max-width:360px; margin:0 auto; } }
   /* tap feedback: no blue flash */
   * { -webkit-tap-highlight-color:transparent; }
@@ -2160,13 +2166,13 @@ function buildStrip() {
 /* ====================== Redeem logic ====================== */
 /* Prices shown on the Pricing page. Edit here. */
 const PRICES = [
-  { id:'chatgpt', name:'ChatGPT',     tag:'Key Type A', price:92500,  cur:'Ks' },
-  { id:'claude',  name:'Claude Pro',  tag:'Key',        price:102000, cur:'Ks' },
-  { id:'gemini',  name:'Gemini Plus', tag:'Key',        price:10000,  cur:'Ks' }
+  { id:'chatgpt', name:'ChatGPT',     tag:'Gift Card', price:92500,  cur:'Ks' },
+  { id:'claude',  name:'Claude Pro',  tag:'Gift Card', price:102000, cur:'Ks' },
+  { id:'gemini',  name:'Gemini Plus', tag:'Gift Card', price:10000,  cur:'Ks' }
 ];
 (function pricing() {
   const el = $('tags'); if (!el) return;
-  el.innerHTML = PRICES.map(p => '<div class="ptag t-' + p.id + '"><i class="o o1"></i><i class="o o2"></i><div class="gf"><div class="top"><div class="tl">' + p.name[0] + '<img src="logos/' + p.id + '.png" alt="" onerror="this.remove()"></div><small>' + p.tag + '</small></div><b>' + p.name + '</b><div class="div"></div><div class="bot"><div class="amt"><strong>' + Number(p.price).toLocaleString('en-US') + '</strong><em>' + p.cur + '</em></div>' + '<svg class="gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="5" rx="1.5"/><path d="M5 13v7h14v-7M12 8v12M12 8c-1-3-5-4-5-1.500S10 8 12 8zm0 0c1-3 5-4 5-1.500S14 8 12 8z"/></svg>' + '</div></div></div>').join('');
+  el.innerHTML = PRICES.map(p => '<div class="ptag t-' + p.id + '"><div class="gf"><div class="top"><div class="tl">' + p.name[0] + '<img src="logos/' + p.id + '.png" alt="" onerror="this.remove()"></div><small>' + p.tag + '</small></div><div><b>' + p.name + '</b><p class="num">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;</p></div><div class="bot"><div class="amt"><strong>' + Number(p.price).toLocaleString('en-US') + '</strong><em>' + p.cur + '</em></div>' + '<svg class="gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="5" rx="1.5"/><path d="M5 13v7h14v-7M12 8v12M12 8c-1-3-5-4-5-1.500S10 8 12 8zm0 0c1-3 5-4 5-1.500S14 8 12 8z"/></svg>' + '</div></div></div>').join('');
 })();
 const PRODUCTS = { chatgpt:{ type:'area' }, claude:{ type:'input' }, grok:{ type:'area' }, x:{ type:'input' } };
 let state = { code:'', platform:'', productName:'', provider:'c1', session:null };
