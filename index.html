@@ -2952,10 +2952,10 @@ $('btnOld').onclick = () => {
 };
 $('btnReset').onclick = () => location.reload();
 if (DEMO) {
-  const SAMPLE = { chatgpt:'{"accessToken":"demo.fake.token","user":{"id":"demo"}}', claude:'123e4567-e89b-42d3-a456-426614174000', grok:'123e4567-e89b-42d3-a456-426614174000', x:'123e4567-e89b-42d3-a456-426614174000' };
+  const SAMPLE = { chatgpt:'{"accessToken":"demo.fake.token","user":{"id":"demo","email":"demo@example.invalid"},"account":{"id":"demo-account"}}', claude:'123e4567-e89b-42d3-a456-426614174000', grok:'123e4567-e89b-42d3-a456-426614174000', x:'123e4567-e89b-42d3-a456-426614174000' };
   const bar = document.createElement('div');
   bar.style.cssText = 'margin:12px 0;padding:12px 14px;border:2px dashed #f59e0b;background:#fffbeb;color:#92400e;border-radius:14px;font-size:14px;line-height:1.6';
-  bar.innerHTML = '<b>🧪 DEMO MODE · စမ်းသပ်ရန်သာ</b><br>Fake keys: <code>DEMO-GPT</code> · <code>DEMO-CLAUDE</code> · <code>DEMO-GROK</code> · <code>DEMO-X</code> · <code>DEMO-FAIL</code> (failure) · <code>DEMO-USED</code><br>Supplier ဆီ ဘာမှ မပို့ပါ။ <button type="button" id="demoFill" style="width:auto;margin-top:6px;padding:6px 12px;border-radius:10px;border:1px solid #f59e0b;background:#fff;color:#92400e;font-weight:700;cursor:pointer">Fill sample credential</button>';
+  bar.innerHTML = '<b>🧪 DEMO MODE · စမ်းသပ်ရန်သာ</b><br>Fake keys: <code>DEMO-GPT</code> · <code>DEMO-CLAUDE</code> · <code>DEMO-GROK</code> · <code>DEMO-X</code> · <code>DEMO-FAIL</code> (failure) · <code>DEMO-USED</code> · Pair: <code>karina-demo0001</code><br>Supplier ဆီ ဘာမှ မပို့ပါ။ <button type="button" id="demoFill" style="width:auto;margin-top:6px;padding:6px 12px;border-radius:10px;border:1px solid #f59e0b;background:#fff;color:#92400e;font-weight:700;cursor:pointer">Fill sample credential</button>';
   $('redeem').insertBefore(bar, $('redeem').firstChild);
   $('demoFill').onclick = () => { const v = SAMPLE[state.platform]; if (!v) return; const el = credEl(); el.value = v; updInfo(); };
 }
@@ -3393,12 +3393,17 @@ route();
    we never send the activation a second time. */
 const PAIR_BASE = 'https://redeem.gamepayhub.shop/api/v2';
 const CLONE_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*-[a-z0-9]{8}$/i;
-let pairConfirm = null, pairTimer = null;
+let pairConfirm = null, pairTimer = null, pairSending = false;
 async function pairCall(path, body) {                    // -> { http, json }; throws on network failure
   if (DEMO) return pairDemo(path, body);
-  const res = await fetch(PAIR_BASE + path, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
-  let json = null; try { json = await res.json(); } catch {}
-  return { http: res.status, json };
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), path === '/check' ? 10000 : 35000);
+  try {
+    const res = await fetch(PAIR_BASE + path, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body),
+      credentials:'omit', cache:'no-store', referrerPolicy:'no-referrer', redirect:'error', signal:controller.signal });
+    let json = null; try { json = await res.json(); } catch {}
+    return { http: res.status, json };
+  } finally { clearTimeout(timer); }
 }
 let pairDemoPolls = 0;
 async function pairDemo(path, body) {                    // ?demo=1 only: the fake clone key is karina-demo0001
@@ -3421,13 +3426,15 @@ const PAIR_MSG = {
   ACTIVATION_FAILED:'f_unknown', RESULT_UNCERTAIN:'c3unc'
 };
 
-// Step 1. Returns true when the clone key was recognised (so the old flow must not run), false to fall through.
+// A clone-shaped key always stays in the Pair flow, including unknown keys and network errors.
 async function pairCheck(code, m) {
   let r;
-  try { r = await pairCall('/check', { cloneKey: code }); } catch { return false; }
+  try { r = await pairCall('/check', { cloneKey: code }); } catch { showK(m, 'err', 'psNetwork'); return true; }
   if (r.http === 429) { showK(m, 'err', 'rate'); return true; }
   const d = pairData(r);
-  if (!(r.json && r.json.ok && d.state === 'ok')) return false;   // unknown here: maybe an older kind of key
+  if (!(r.json && r.json.ok && d.state === 'ok')) {
+    showK(m, 'err', r.http >= 500 || !r.json ? 'busy503' : 'nf'); return true;
+  }
   const platform = d.credentialKind === 'org_id' ? 'claude' : (d.credentialKind === 'chatgpt_session' ? 'chatgpt' : '');
   if (!platform) { showK(m, 'err', 'unsup'); return true; }
   if (d.status === 'used') { showK(m, 'err', 'used'); return true; }
@@ -3458,73 +3465,93 @@ function pairCredential() {
 
 // Step 2: send the activation ONCE. kind = 'redeem' or 'confirm'.
 async function pairSubmit(m, kind, credential) {
+  const code = state.code;
   let r;
-  try { r = await pairCall('/' + kind, { cloneKey: state.code, credential, consent: true }); }
-  catch { state.session = null; return pairTrack(state.code, true); }     // timeout: it may have gone through, only look
+  try { r = await pairCall('/' + kind, { cloneKey: code, credential, consent: true }); }
+  catch { state.session = null; $('credArea').value = ''; $('credInput').value = ''; return pairTrack(code, true); }
   const d = pairData(r), c = pairErrCode(r);
   if (r.http === 429) { state.session = null; return showK(m, 'err', 'rate'); }
   if (c === 'CONSENT_REQUIRED') return showK(m, 'err', 'needConsent');
-  if (!d.state) { state.session = null; return showK(m, 'err', c === 'SERVICE_UNAVAILABLE' ? 'busy503' : 'cdkInvalid'); }
+  if (!d.state) {
+    state.session = null;
+    if (c === 'SERVICE_UNAVAILABLE') return showK(m, 'err', 'busy503'); // relay rejected before any claim
+    $('credArea').value = ''; $('credInput').value = ''; return pairTrack(code, true);
+  }
   if (d.state === 'confirm') {                                             // keep the account info in memory for the one confirm
     state.session = credential;
+    state.awaiting = true;
     return pairAskConfirm(d.expiresAt);
   }
   state.session = null;                                                    // never keep it longer than needed
   $('credArea').value = ''; $('credInput').value = '';
   if (d.state === 'success') return pairDone('ok');
-  if (d.state === 'processing') return pairTrack(state.code, false);
+  if (d.state === 'processing') return pairTrack(code, false);
   if (d.state === 'uncertain') return pairDone('c3unc', 'err');
   if (d.state === 'failed') return pairDone(PAIR_MSG[d.code] || 'f_unknown', 'err');
   if (d.state === 'rejected') {
     if (d.code === 'KEY_UNAVAILABLE') return showK(m, 'err', 'nf');
+    if (d.code === 'KEY_NOT_READY') return pairTrack(code, true);
     return showK(m, 'err', PAIR_MSG[d.code] || 'busy503');
   }
-  return pairTrack(state.code, true);
+  return pairTrack(code, true);
 }
 $('btnRedeem').addEventListener('click', async ev => {
   if (state.provider !== 'pair') return;
   ev.stopImmediatePropagation();
+  if ($('btnRedeem').disabled || pairConfirm || pairSending) return;
   const m = $('m2');
   let credential;
   try { credential = pairCredential(); } catch (e) { return e.k ? showK(m, 'err', e.k) : showRaw(m, 'err', e.message); }
   if (!$('consent').checked) return showK(m, 'err', 'needConsent');
+  if (state.awaiting) { state.session = credential; return pairAskConfirm(null); }
   setBusy($('btnRedeem'), true, 'sending');
-  try { await pairSubmit(m, state.awaiting ? 'confirm' : 'redeem', credential); } finally { setBusy($('btnRedeem'), false, 'redeem'); }
+  pairSending = true;
+  try { await pairSubmit(m, 'redeem', credential); } finally { pairSending = false; setBusy($('btnRedeem'), false, 'redeem'); $('btnRedeem').disabled = Boolean(pairConfirm); }
 }, true);
 
 function pairAskConfirm(expiresAt) {
   clearInterval(pairTimer);
+  pairConfirm = { sending:false };
+  $('btnRedeem').disabled = true; $('btnConfirm').disabled = false;
   const end = Date.parse(expiresAt);
   $('confirmBox').classList.remove('hidden');
+  // A resumed confirmation has no public expiry value; the relay enforces its original deadline.
+  if (expiresAt === null) { $('confirmText').textContent = t('confirmTitle'); return; }
   const tick = () => {
     const left = Math.max(0, Math.floor((end - Date.now()) / 1000));
     if (!Number.isFinite(end) || left <= 0) {
-      clearInterval(pairTimer); state.session = null; $('confirmBox').classList.add('hidden');
-      return pairDone('pConfirmExpired', 'err');
+      clearInterval(pairTimer); pairConfirm = null; state.session = null; $('confirmBox').classList.add('hidden');
+      pairDone('pConfirmExpired', 'err'); return false;
     }
     $('confirmText').textContent = t('pConfirmText').replace('{t}', Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0'));
   };
-  tick(); pairTimer = setInterval(tick, 1000);
+  if (tick() !== false) pairTimer = setInterval(tick, 1000);
 }
 $('btnConfirm').addEventListener('click', async ev => {
   if (state.provider !== 'pair') return;
   ev.stopImmediatePropagation();
+  if (!pairConfirm || pairConfirm.sending || pairSending) return;
+  pairConfirm.sending = true; $('btnConfirm').disabled = true;
   clearInterval(pairTimer);
   const credential = state.session;
   $('confirmBox').classList.add('hidden');
   if (!credential) return showK($('m2'), 'err', 'sessionExpired');
   setBusy($('btnRedeem'), true, 'sending');
-  try { await pairSubmit($('m2'), 'confirm', credential); } finally { setBusy($('btnRedeem'), false, 'redeem'); }
+  pairConfirm = null;
+  pairSending = true;
+  try { await pairSubmit($('m2'), 'confirm', credential); } finally { pairSending = false; setBusy($('btnRedeem'), false, 'redeem'); $('btnRedeem').disabled = Boolean(pairConfirm); }
 }, true);
 $('btnCancel').addEventListener('click', ev => {
   if (state.provider !== 'pair') return;
   ev.stopImmediatePropagation();
-  clearInterval(pairTimer); state.session = null; $('confirmBox').classList.add('hidden');
-  showK($('m2'), 'info', 'pCancelNote');
+  clearInterval(pairTimer); pairConfirm = null; state.session = null;
+  $('credArea').value = ''; $('credInput').value = ''; $('confirmBox').classList.add('hidden');
+  pairDone('pCancelNote', 'err');
 }, true);
 
 function pairShowStep3() {
   clearInterval(pollTimer); clearTimeout(pollTimer); clearInterval(pairTimer);
+  pairConfirm = null; state.session = null;
   $('s1').classList.add('hidden'); $('s2').classList.add('hidden'); $('s3').classList.remove('hidden');
   setStep(3);
   $('tokRow').classList.add('hidden'); $('saveNote').classList.remove('hidden');
@@ -3543,7 +3570,9 @@ function pairTrack(code, uncertain) {
   showK($('status'), 'info', uncertain ? 'uncertain' : 'wait');
   const finish = (key, cls) => { showK($('status'), cls, key); $('btnReset').classList.remove('hidden'); syncLock(); };
   let tries = 0;
+  const deadline = Date.now() + 600000;
   const tick = async () => {
+    if (Date.now() >= deadline) return finish('slow', 'info');
     tries++;
     try {
       const r = await pairCall('/check', { cloneKey: code });
@@ -3554,10 +3583,10 @@ function pairTrack(code, uncertain) {
         if (d.status === 'uncertain') return finish('c3unc', 'err');
         if (d.status === 'ready') return finish(uncertain ? 'unclear' : 'pBackReady', uncertain ? 'err' : 'info');
         if (d.status === 'awaiting_confirmation') return finish('pConfirmExpired', 'err');
-        showK($('status'), 'info', 'proc', 'processing)');
+        showK($('status'), 'info', 'proc');
       }
     } catch {}
-    if (tries > 120) return finish('slow', 'info');
+    if (tries > 120 || Date.now() >= deadline) return finish('slow', 'info');
     pollTimer = setTimeout(tick, 5000);
   };
   pollTimer = setTimeout(tick, 3000);
@@ -3566,7 +3595,9 @@ function pairTrack(code, uncertain) {
 /* The four service tabs: pick one to preview its look. Checking a key always sets the real product. */
 function syncLock() { $('viewRedeem').classList.toggle('proc', !$('s3').classList.contains('hidden') && $('btnReset').classList.contains('hidden')); }
 function backToStep1() {                                   // leave step 2/3 and start fresh for another product
-  clearInterval(pollTimer);
+  if (pairSending) return;
+  clearInterval(pollTimer); clearTimeout(pollTimer); clearInterval(pairTimer); pairConfirm = null; state.session = null;
+  $('btnRedeem').disabled = false;
   $('s2').classList.add('hidden'); $('s3').classList.add('hidden'); $('s1').classList.remove('hidden');
   $('code').value = ''; $('credInput').value = ''; $('credArea').value = '';
   ['m1','m2'].forEach(id => { const e = $(id); e.className = ''; e.textContent = ''; e._m = null; });
@@ -3574,6 +3605,7 @@ function backToStep1() {                                   // leave step 2/3 and
   setStep(1); syncLock();
 }
 document.querySelectorAll('#viewRedeem .lp').forEach(btn => btn.addEventListener('click', () => {
+  if (pairSending) return;
   if (!$('s3').classList.contains('hidden') && $('btnReset').classList.contains('hidden')) return;   // activation running: do not interrupt
   const p = btn.dataset.p, wasStep1 = !$('s1').classList.contains('hidden');
   if (!wasStep1) backToStep1();
