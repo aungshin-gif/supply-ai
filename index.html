@@ -1182,6 +1182,13 @@ const T = {
     blocked:'This key cannot be used right now. Please contact the seller.',
     c2save:'To check later, enter the same key under "Check an order".',
     c2off:'ChatGPT redemption is being set up. Please try again later.',
+    consentOrg:'I agree that my account information may be processed to activate this key.',
+    pNotReady:'This key is not ready to use right now. If you already submitted it, wait and check again. Otherwise please contact the seller.',
+    pCredInvalid:'The account information is not valid. Please copy it again exactly and try again (your key is not used).',
+    pBackReady:'Nothing was activated and your key is still unused. You can try again.',
+    pConfirmText:'Please confirm this is the right account. Time left: {t}',
+    pConfirmExpired:'The confirmation time ended. Do not submit again. Please contact the seller and give them your key.',
+    pCancelNote:'You cancelled. Your key stays on hold. Please contact the seller if you need help.',
     sessionExpired:'The ChatGPT session has expired. Get a fresh one and try again.',
     cdkInvalid:'The key format is invalid',
     busy503:'The service is temporarily unavailable. Please try again later.',
@@ -1336,6 +1343,13 @@ const T = {
     blocked:'ဒီ Key ကို အခု သုံးလို့မရပါ။ ရောင်းသူကို ဆက်သွယ်ပါ',
     c2save:'နောက်မှ ပြန်စစ်ချင်ရင် "Order ပြန်စစ်မယ်" မှာ ဒီ Key ကိုပဲ ထည့်ပါ',
     c2off:'ChatGPT redeem ကို ပြင်ဆင်နေဆဲပါ။ နောက်မှ ပြန်ကြိုးစားပါ',
+    consentOrg:'ဒီ Key ကို အသက်သွင်းရန် ကျွန်ုပ်၏ အကောင့်အချက်အလက်ကို အသုံးပြုခြင်းကို သဘောတူပါတယ်။',
+    pNotReady:'ဒီ Key ကို အခု မသုံးနိုင်သေးပါ။ ပို့ပြီးသားဆိုရင် ခဏစောင့်ပြီး ပြန်စစ်ပါ။ မဟုတ်ရင် ရောင်းသူကို ဆက်သွယ်ပါ။',
+    pCredInvalid:'အကောင့်အချက်အလက် မမှန်ပါ။ အတိအကျ ပြန်ကူးပြီး ထပ်ကြိုးစားပါ (Key မကုန်ပါ)။',
+    pBackReady:'ဘာမှ activate မလုပ်ခဲ့ပါ။ Key ကို မသုံးသေးပါ၊ ထပ်ကြိုးစားနိုင်ပါတယ်။',
+    pConfirmText:'ဒီအကောင့်မှန်ကြောင်း အတည်ပြုပါ။ ကျန်ချိန်: {t}',
+    pConfirmExpired:'အတည်ပြုချိန် ကုန်သွားပါပြီ။ ထပ်မပို့ပါနဲ့။ ရောင်းသူကို ဆက်သွယ်ပြီး Key ပေးပါ။',
+    pCancelNote:'ပယ်ဖျက်ခဲ့ပါတယ်။ Key ကို ခဏ ဆိုင်းထားပါတယ်။ အကူအညီလိုရင် ရောင်းသူကို ဆက်သွယ်ပါ။',
     sessionExpired:'ChatGPT session သက်တမ်းကုန်သွားပါပြီ။ အသစ်ယူပြီး ပြန်ကြိုးစားပါ',
     cdkInvalid:'Key ပုံစံ မမှန်ပါ',
     busy503:'Service ကို ခဏပိတ်ထားပါတယ်။ နောက်မှ ပြန်ကြိုးစားပါ',
@@ -1490,6 +1504,13 @@ const T = {
     blocked:'ตอนนี้ยังใช้คีย์นี้ไม่ได้ กรุณาติดต่อผู้ขาย',
     c2save:'หากต้องการตรวจสอบภายหลัง ให้ใส่คีย์เดิมที่ "ตรวจสอบคำสั่งซื้อ"',
     c2off:'กำลังตั้งค่าการเติม ChatGPT กรุณาลองใหม่ภายหลัง',
+    consentOrg:'ฉันยินยอมให้ประมวลผลข้อมูลบัญชีของฉันเพื่อเปิดใช้งานคีย์นี้',
+    pNotReady:'คีย์นี้ยังใช้งานไม่ได้ในขณะนี้ หากส่งไปแล้วให้รอแล้วตรวจสอบอีกครั้ง มิฉะนั้นโปรดติดต่อผู้ขาย',
+    pCredInvalid:'ข้อมูลบัญชีไม่ถูกต้อง กรุณาคัดลอกใหม่ให้ตรงแล้วลองอีกครั้ง (คีย์ยังไม่ถูกใช้)',
+    pBackReady:'ยังไม่มีการเปิดใช้งาน และคีย์ยังไม่ถูกใช้ คุณลองอีกครั้งได้',
+    pConfirmText:'กรุณายืนยันว่าเป็นบัญชีที่ถูกต้อง เวลาที่เหลือ: {t}',
+    pConfirmExpired:'หมดเวลายืนยันแล้ว อย่าส่งซ้ำ กรุณาติดต่อผู้ขายและแจ้งคีย์ของคุณ',
+    pCancelNote:'คุณยกเลิกแล้ว คีย์ถูกพักไว้ หากต้องการความช่วยเหลือโปรดติดต่อผู้ขาย',
     sessionExpired:'ChatGPT session หมดอายุแล้ว กรุณาขอใหม่แล้วลองอีกครั้ง',
     cdkInvalid:'รูปแบบคีย์ไม่ถูกต้อง',
     busy503:'บริการไม่พร้อมใช้งานชั่วคราว กรุณาลองใหม่ภายหลัง',
@@ -1644,6 +1665,13 @@ const T = {
     blocked:'Dieser Key kann derzeit nicht verwendet werden. Bitte wende dich an den Verkäufer.',
     c2save:'Zum späteren Prüfen gib unter „Bestellung prüfen“ denselben Key ein.',
     c2off:'Die ChatGPT-Einlösung wird gerade eingerichtet. Bitte später erneut versuchen.',
+    consentOrg:'Ich stimme zu, dass meine Kontodaten zur Aktivierung dieses Schlüssels verarbeitet werden.',
+    pNotReady:'Dieser Schlüssel ist gerade nicht einsatzbereit. Falls Sie ihn schon gesendet haben, warten Sie und prüfen Sie erneut. Andernfalls kontaktieren Sie den Verkäufer.',
+    pCredInvalid:'Die Kontodaten sind ungültig. Bitte exakt neu kopieren und erneut versuchen (Ihr Schlüssel wurde nicht verbraucht).',
+    pBackReady:'Es wurde nichts aktiviert und Ihr Schlüssel ist weiterhin unbenutzt. Sie können es erneut versuchen.',
+    pConfirmText:'Bitte bestätigen Sie, dass dies das richtige Konto ist. Verbleibende Zeit: {t}',
+    pConfirmExpired:'Die Bestätigungszeit ist abgelaufen. Nicht erneut senden. Bitte kontaktieren Sie den Verkäufer und nennen Sie Ihren Schlüssel.',
+    pCancelNote:'Sie haben abgebrochen. Ihr Schlüssel bleibt gesperrt. Bei Fragen kontaktieren Sie bitte den Verkäufer.',
     sessionExpired:'Die ChatGPT-Session ist abgelaufen. Hole eine neue und versuche es erneut.',
     cdkInvalid:'Das Key-Format ist ungültig',
     busy503:'Der Dienst ist vorübergehend nicht verfügbar. Bitte später erneut versuchen.',
@@ -1798,6 +1826,13 @@ const T = {
     blocked:'Cette clé ne peut pas être utilisée pour le moment. Veuillez contacter le vendeur.',
     c2save:'Pour vérifier plus tard, saisissez la même clé dans « Vérifier une commande ».',
     c2off:'L’activation ChatGPT est en cours de mise en place. Veuillez réessayer plus tard.',
+    consentOrg:'J’accepte que les informations de mon compte soient traitées pour activer cette clé.',
+    pNotReady:'Cette clé n’est pas utilisable pour le moment. Si vous l’avez déjà envoyée, patientez puis vérifiez à nouveau. Sinon, contactez le vendeur.',
+    pCredInvalid:'Les informations du compte sont invalides. Copiez-les à nouveau exactement et réessayez (votre clé n’a pas été utilisée).',
+    pBackReady:'Rien n’a été activé et votre clé reste inutilisée. Vous pouvez réessayer.',
+    pConfirmText:'Veuillez confirmer qu’il s’agit du bon compte. Temps restant : {t}',
+    pConfirmExpired:'Le délai de confirmation est écoulé. Ne renvoyez pas. Contactez le vendeur et indiquez votre clé.',
+    pCancelNote:'Vous avez annulé. Votre clé reste en attente. Contactez le vendeur si vous avez besoin d’aide.',
     sessionExpired:'La session ChatGPT a expiré. Obtenez-en une nouvelle et réessayez.',
     cdkInvalid:'Le format de la clé est invalide',
     busy503:'Le service est temporairement indisponible. Veuillez réessayer plus tard.',
@@ -1952,6 +1987,13 @@ const T = {
     blocked:'このキーは現在使用できません。販売者にお問い合わせください。',
     c2save:'後で確認するには、「注文を確認」に同じキーを入力してください。',
     c2off:'ChatGPTのチャージは準備中です。しばらくしてからお試しください。',
+    consentOrg:'このキーを有効化するために、アカウント情報が処理されることに同意します。',
+    pNotReady:'このキーは現在使用できません。すでに送信済みの場合は、しばらく待ってから再確認してください。それ以外は販売者にご連絡ください。',
+    pCredInvalid:'アカウント情報が正しくありません。正確にコピーし直して再度お試しください（キーは消費されていません）。',
+    pBackReady:'何も有効化されておらず、キーは未使用のままです。もう一度お試しいただけます。',
+    pConfirmText:'正しいアカウントか確認してください。残り時間：{t}',
+    pConfirmExpired:'確認の制限時間が過ぎました。再送信しないでください。販売者にキーをお伝えください。',
+    pCancelNote:'キャンセルしました。キーは保留中です。サポートが必要な場合は販売者にご連絡ください。',
     sessionExpired:'ChatGPTのセッションが期限切れです。新しく取得してもう一度お試しください。',
     cdkInvalid:'キーの形式が正しくありません',
     busy503:'サービスは一時的にご利用いただけません。しばらくしてからお試しください。',
@@ -2106,6 +2148,13 @@ const T = {
     blocked:'지금은 이 키를 사용할 수 없습니다. 판매자에게 문의해 주세요.',
     c2save:'나중에 확인하려면 "주문 조회"에 같은 키를 입력하세요.',
     c2off:'ChatGPT 충전은 준비 중입니다. 나중에 다시 시도해 주세요.',
+    consentOrg:'이 키를 활성화하기 위해 내 계정 정보가 처리되는 것에 동의합니다.',
+    pNotReady:'이 키는 지금 사용할 수 없습니다. 이미 제출했다면 잠시 후 다시 확인해 주세요. 그렇지 않으면 판매자에게 문의해 주세요.',
+    pCredInvalid:'계정 정보가 올바르지 않습니다. 정확히 다시 복사해 다시 시도해 주세요(키는 사용되지 않았습니다).',
+    pBackReady:'활성화된 것이 없으며 키는 아직 사용되지 않았습니다. 다시 시도할 수 있습니다.',
+    pConfirmText:'올바른 계정인지 확인해 주세요. 남은 시간: {t}',
+    pConfirmExpired:'확인 시간이 지났습니다. 다시 제출하지 마세요. 판매자에게 키를 알려 주세요.',
+    pCancelNote:'취소했습니다. 키는 보류 상태입니다. 도움이 필요하면 판매자에게 문의해 주세요.',
     sessionExpired:'ChatGPT 세션이 만료되었습니다. 새로 가져와서 다시 시도해 주세요.',
     cdkInvalid:'키 형식이 올바르지 않습니다',
     busy503:'서비스를 일시적으로 이용할 수 없습니다. 나중에 다시 시도해 주세요.',
@@ -2304,7 +2353,7 @@ function updInfo() {
   const i = $('credInfo'), v = credEl().value.trim();
   if (!v) { i.className = 'cinfo'; i.textContent = ''; return; }
   const n = v.length.toLocaleString('en-US');
-  if (state.provider === 'c2' || state.provider === 'c3') { i.className = 'cinfo ok'; i.textContent = t('cOk').replace('{n}', n); return; }
+  if (state.provider === 'c2' || state.provider === 'c3' || (state.provider === 'pair' && state.platform === 'chatgpt')) { i.className = 'cinfo ok'; i.textContent = t('cOk').replace('{n}', n); return; }
   try { buildCredential(); i.className = 'cinfo ok'; i.textContent = t('cOk').replace('{n}', n); }
   catch (e) { i.className = 'cinfo bad'; i.textContent = t('cCut'); }
 }
@@ -2327,6 +2376,12 @@ $('btnCheck').onclick = async () => {
   const m = $('m1');
   if (!code) return showK(m, 'err', 'enterKey');
   setBusy($('btnCheck'), true, 'checking');
+  if (CLONE_RE.test(code)) {                                // clone key ("Your key"): try the Pair flow first
+    let handled = false;
+    try { handled = await pairCheck(code, m); } finally { setBusy($('btnCheck'), false, 'check'); }
+    if (handled) return;
+    setBusy($('btnCheck'), true, 'checking');
+  }
   if (C2_RE.test(code)) {                                   // ChatGPT keys go through our relay
     try { await c2Check(code, m); } finally { setBusy($('btnCheck'), false, 'check'); }
     return;
@@ -2385,6 +2440,7 @@ function buildCredential() {
 
 // Step 2: redeem
 $('btnRedeem').onclick = async () => {
+  if (state.provider === 'pair') return;            // handled by the clone-key code below
   const m = $('m2');
   if (state.provider === 'c2') return c2Submit(m);
   if (state.provider === 'c3') return c3Submit(m);
@@ -2485,7 +2541,8 @@ function openStep2(p) {
   $('credInput').value = ''; $('credArea').value = ''; $('credInfo').textContent = ''; $('credInfo').className = 'cinfo';
   $('credInput').classList.toggle('hidden', p.type !== 'input');
   $('credArea').classList.toggle('hidden', p.type !== 'area');
-  $('consentRow').classList.toggle('hidden', state.provider !== 'c2' && state.provider !== 'c3');
+  $('consentRow').classList.toggle('hidden', state.provider !== 'c2' && state.provider !== 'c3' && state.provider !== 'pair');
+  { const cs = $('consentRow').querySelector('span'); cs.dataset.i = (state.provider === 'pair' && state.platform !== 'chatgpt') ? 'consentOrg' : 'consent'; cs.textContent = t(cs.dataset.i); }
   $('consent').checked = false;
   $('confirmBox').classList.add('hidden');
   $('s1').classList.add('hidden');
@@ -2563,13 +2620,14 @@ async function c2Create(m, confirmationToken) {
 }
 
 $('btnConfirm').onclick = async () => {
+  if (state.provider === 'pair') return;
   const token = pendingConfirm; pendingConfirm = null;
   $('confirmBox').classList.add('hidden');
   if (!token || !state.session) return showK($('m2'), 'err', 'sessionExpired');
   setBusy($('btnRedeem'), true, 'sending');
   try { await c2Create($('m2'), token); } finally { setBusy($('btnRedeem'), false, 'redeem'); }
 };
-$('btnCancel').onclick = () => { pendingConfirm = null; state.session = null; $('confirmBox').classList.add('hidden'); };
+$('btnCancel').onclick = () => { if (state.provider === 'pair') return; pendingConfirm = null; state.session = null; $('confirmBox').classList.add('hidden'); };
 
 // Step 3 for ChatGPT keys: poll status by the key (no webhook)
 function c2Track(code, uncertain) {
@@ -2821,6 +2879,182 @@ route();
   if (!reduce) requestAnimationFrame(tick);
   window.addEventListener('hashchange', () => setTimeout(() => { layout(); draw(); }, 0));
 })();
+
+/* ====================== Clone keys ("Your key") via our relay: /api/v2 ======================
+   The key the customer holds is a clone key. The real supplier key never reaches the browser.
+   The relay answers only { state, code, expiresAt }. After ANY doubt (timeout, uncertain) we only look at the status,
+   we never send the activation a second time. */
+const PAIR_BASE = 'https://redeem.gamepayhub.shop/api/v2';
+const CLONE_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*-[a-z0-9]{8}$/i;
+let pairConfirm = null, pairTimer = null;
+async function pairCall(path, body) {                    // -> { http, json }; throws on network failure
+  if (DEMO) return pairDemo(path, body);
+  const res = await fetch(PAIR_BASE + path, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+  let json = null; try { json = await res.json(); } catch {}
+  return { http: res.status, json };
+}
+let pairDemoPolls = 0;
+async function pairDemo(path, body) {                    // ?demo=1 only: the fake clone key is karina-demo0001
+  await demoWait(600);
+  const ok = String(body.cloneKey || '').toLowerCase() === 'karina-demo0001';
+  if (!ok) return { http:200, json:{ ok:false, data:{ state:'rejected', code:'KEY_UNAVAILABLE' } } };
+  if (path === '/check') {
+    let status = 'ready';
+    if (pairDemoPolls > 0) { pairDemoPolls++; status = pairDemoPolls > 2 ? 'used' : 'processing'; }
+    return { http:200, json:{ ok:true, data:{ state:'ok', status, credentialKind:'chatgpt_session', productName:'ChatGPT Plus' } } };
+  }
+  pairDemoPolls = 1;
+  return { http:200, json:{ ok:true, data:{ state:'processing' } } };
+}
+const pairData = r => (r && r.json && r.json.data) || {};
+const pairErrCode = r => (r && r.json && r.json.error && r.json.error.code) || '';
+const PAIR_MSG = {
+  KEY_UNAVAILABLE:'nf', KEY_NOT_READY:'pNotReady', CREDENTIAL_INVALID:'pCredInvalid', SESSION_EXPIRED:'sessionExpired',
+  SESSION_INVALID:'f_SESSION_INVALID', ACCOUNT_ALREADY_PAID:'f_ACCOUNT_ALREADY_PAID', SERVICE_BUSY:'busy503',
+  ACTIVATION_FAILED:'f_unknown', RESULT_UNCERTAIN:'c3unc'
+};
+
+// Step 1. Returns true when the clone key was recognised (so the old flow must not run), false to fall through.
+async function pairCheck(code, m) {
+  let r;
+  try { r = await pairCall('/check', { cloneKey: code }); } catch { return false; }
+  if (r.http === 429) { showK(m, 'err', 'rate'); return true; }
+  const d = pairData(r);
+  if (!(r.json && r.json.ok && d.state === 'ok')) return false;   // unknown here: maybe an older kind of key
+  const platform = d.credentialKind === 'org_id' ? 'claude' : (d.credentialKind === 'chatgpt_session' ? 'chatgpt' : '');
+  if (!platform) { showK(m, 'err', 'unsup'); return true; }
+  if (d.status === 'used') { showK(m, 'err', 'used'); return true; }
+  if (d.status === 'uncertain') { showK(m, 'err', 'c3unc'); return true; }
+  if (d.status === 'failed') { showK(m, 'err', 'blocked'); return true; }
+  state = { code, platform, productName: d.productName || '', provider:'pair', session:null, awaiting: d.status === 'awaiting_confirmation' };
+  if (d.status === 'processing') { fillProduct(); pairTrack(code, false); return true; }
+  fillProduct();
+  openStep2(PRODUCTS[platform]);
+  if (d.status === 'awaiting_confirmation') showK($('m2'), 'info', 'confirmTitle');
+  return true;
+}
+
+function pairCredential() {
+  const raw = (PRODUCTS[state.platform].type === 'area' ? $('credArea').value : $('credInput').value).trim();
+  if (!raw) throw kerr('enterInfo');
+  if (state.platform === 'chatgpt') {
+    let o; try { o = JSON.parse(raw); } catch { throw kerr('badJson'); }
+    if (!o || typeof o !== 'object' || Array.isArray(o)) throw kerr('badJson');
+    if (!o.accessToken) throw kerr('noAT');
+    if (!(o.user && o.user.email) || !(o.account && o.account.id)) throw kerr('sessMissing');
+    return o;
+  }
+  const v = raw.toLowerCase();
+  if (!UUID.test(v)) throw kerr('badUuid');
+  return v;
+}
+
+// Step 2: send the activation ONCE. kind = 'redeem' or 'confirm'.
+async function pairSubmit(m, kind, credential) {
+  let r;
+  try { r = await pairCall('/' + kind, { cloneKey: state.code, credential, consent: true }); }
+  catch { state.session = null; return pairTrack(state.code, true); }     // timeout: it may have gone through, only look
+  const d = pairData(r), c = pairErrCode(r);
+  if (r.http === 429) { state.session = null; return showK(m, 'err', 'rate'); }
+  if (c === 'CONSENT_REQUIRED') return showK(m, 'err', 'needConsent');
+  if (!d.state) { state.session = null; return showK(m, 'err', c === 'SERVICE_UNAVAILABLE' ? 'busy503' : 'cdkInvalid'); }
+  if (d.state === 'confirm') {                                             // keep the account info in memory for the one confirm
+    state.session = credential;
+    return pairAskConfirm(d.expiresAt);
+  }
+  state.session = null;                                                    // never keep it longer than needed
+  $('credArea').value = ''; $('credInput').value = '';
+  if (d.state === 'success') return pairDone('ok');
+  if (d.state === 'processing') return pairTrack(state.code, false);
+  if (d.state === 'uncertain') return pairDone('c3unc', 'err');
+  if (d.state === 'failed') return pairDone(PAIR_MSG[d.code] || 'f_unknown', 'err');
+  if (d.state === 'rejected') {
+    if (d.code === 'KEY_UNAVAILABLE') return showK(m, 'err', 'nf');
+    return showK(m, 'err', PAIR_MSG[d.code] || 'busy503');
+  }
+  return pairTrack(state.code, true);
+}
+$('btnRedeem').addEventListener('click', async ev => {
+  if (state.provider !== 'pair') return;
+  ev.stopImmediatePropagation();
+  const m = $('m2');
+  let credential;
+  try { credential = pairCredential(); } catch (e) { return e.k ? showK(m, 'err', e.k) : showRaw(m, 'err', e.message); }
+  if (!$('consent').checked) return showK(m, 'err', 'needConsent');
+  setBusy($('btnRedeem'), true, 'sending');
+  try { await pairSubmit(m, state.awaiting ? 'confirm' : 'redeem', credential); } finally { setBusy($('btnRedeem'), false, 'redeem'); }
+}, true);
+
+function pairAskConfirm(expiresAt) {
+  clearInterval(pairTimer);
+  const end = Date.parse(expiresAt);
+  $('confirmBox').classList.remove('hidden');
+  const tick = () => {
+    const left = Math.max(0, Math.floor((end - Date.now()) / 1000));
+    if (!Number.isFinite(end) || left <= 0) {
+      clearInterval(pairTimer); state.session = null; $('confirmBox').classList.add('hidden');
+      return pairDone('pConfirmExpired', 'err');
+    }
+    $('confirmText').textContent = t('pConfirmText').replace('{t}', Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0'));
+  };
+  tick(); pairTimer = setInterval(tick, 1000);
+}
+$('btnConfirm').addEventListener('click', async ev => {
+  if (state.provider !== 'pair') return;
+  ev.stopImmediatePropagation();
+  clearInterval(pairTimer);
+  const credential = state.session;
+  $('confirmBox').classList.add('hidden');
+  if (!credential) return showK($('m2'), 'err', 'sessionExpired');
+  setBusy($('btnRedeem'), true, 'sending');
+  try { await pairSubmit($('m2'), 'confirm', credential); } finally { setBusy($('btnRedeem'), false, 'redeem'); }
+}, true);
+$('btnCancel').addEventListener('click', ev => {
+  if (state.provider !== 'pair') return;
+  ev.stopImmediatePropagation();
+  clearInterval(pairTimer); state.session = null; $('confirmBox').classList.add('hidden');
+  showK($('m2'), 'info', 'pCancelNote');
+}, true);
+
+function pairShowStep3() {
+  clearInterval(pollTimer); clearTimeout(pollTimer); clearInterval(pairTimer);
+  $('s1').classList.add('hidden'); $('s2').classList.add('hidden'); $('s3').classList.remove('hidden');
+  setStep(3);
+  $('tokRow').classList.add('hidden'); $('saveNote').classList.remove('hidden');
+  $('btnReset').classList.add('hidden');
+  $('redeem').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function pairDone(key, cls) {
+  pairShowStep3();
+  showK($('status'), cls === 'err' ? 'err' : 'ok', key === 'ok' ? 'done' : key);
+  $('btnReset').classList.remove('hidden'); syncLock();
+}
+
+// Step 3: look at the status by the clone key (no activation is ever re-sent from here)
+function pairTrack(code, uncertain) {
+  pairShowStep3();
+  showK($('status'), 'info', uncertain ? 'uncertain' : 'wait');
+  const finish = (key, cls) => { showK($('status'), cls, key); $('btnReset').classList.remove('hidden'); syncLock(); };
+  let tries = 0;
+  const tick = async () => {
+    tries++;
+    try {
+      const r = await pairCall('/check', { cloneKey: code });
+      const d = pairData(r);
+      if (r.json && r.json.ok && d.state === 'ok') {
+        if (d.status === 'used') return finish('done', 'ok');
+        if (d.status === 'failed') return finish('f_unknown', 'err');
+        if (d.status === 'uncertain') return finish('c3unc', 'err');
+        if (d.status === 'ready') return finish(uncertain ? 'unclear' : 'pBackReady', uncertain ? 'err' : 'info');
+        if (d.status === 'awaiting_confirmation') return finish('pConfirmExpired', 'err');
+        showK($('status'), 'info', 'proc', 'processing)');
+      }
+    } catch {}
+    if (tries > 120) return finish('slow', 'info');
+    pollTimer = setTimeout(tick, 5000);
+  };
+  pollTimer = setTimeout(tick, 3000);
+}
 
 /* The four service tabs: pick one to preview its look. Checking a key always sets the real product. */
 function syncLock() { $('viewRedeem').classList.toggle('proc', !$('s3').classList.contains('hidden') && $('btnReset').classList.contains('hidden')); }
