@@ -454,7 +454,7 @@
   .gwarn b { display:block; margin-bottom:4px; } .gwarn ul { margin:0; padding-left:18px; color:var(--gmute); font-size:14px; line-height:1.6; } .gd[data-theme=grok] .gwarn ul { color:#d4d6dc; }
   .gd-go { display:block; margin:18px; padding:14px; border-radius:16px; text-align:center; text-decoration:none; font-weight:800; color:var(--gon); background:var(--gacc);
            box-shadow:0 5px 0 rgba(0,0,0,.28), 0 12px 18px rgba(15,37,71,.18), inset 0 1px 0 rgba(255,255,255,.4); }
-  @media (max-width:520px) { .glogorow { gap:6px; } .gd-h { padding:12px 14px; } .gd-grid { padding:14px 12px 2px; gap:14px; } .gstep { grid-template-columns:42px minmax(0,1fr); gap:10px; } .gic { width:42px; height:42px; } .gic svg { width:21px; height:21px; } .gstep:not(:last-child)::after { left:20px; top:46px; } .gd-go { margin:14px 12px; } }
+  @media (max-width:520px) { .glogorow { gap:11px; } .glogorow .lp { padding:11px 6px 10px; } .gd-h { padding:12px 14px; } .gd-grid { padding:14px 12px 2px; gap:14px; } .gstep { grid-template-columns:42px minmax(0,1fr); gap:10px; } .gic { width:42px; height:42px; } .gic svg { width:21px; height:21px; } .gstep:not(:last-child)::after { left:20px; top:46px; } .gd-go { margin:14px 12px; } }
   /* scroll reveal */
   .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
   .reveal.in { opacity:1; transform:none; }
@@ -737,9 +737,25 @@
 [hidden]{display:none!important}
 @media(max-width:1050px){.nav .nav-in{flex-wrap:wrap;gap:7px 12px;padding-top:9px;padding-bottom:6px}.nav .brand{order:0}.nav .lang{order:1;margin-left:auto}.nav .links{order:2;width:100%;justify-content:center;margin:0}.nav .links a{padding:7px 11px;font-size:13px}.nav .nav-icon{width:23px;height:23px}}
 @media(max-width:700px){.billing-layout{grid-template-columns:minmax(0,1fr);gap:17px}.billing-page-header{margin:23px 0}.billing-lookup,.billing-summary{padding:21px}.billing-page-header h1{font-size:28px}.billing-description{font-size:12px}}
-@media(max-width:600px){.nav .links{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px}.nav .links a{flex-direction:column;justify-content:flex-start;gap:4px;min-height:55px;padding:7px 1px 5px;border-radius:10px;white-space:normal}.nav .nav-label{font-size:9px;line-height:1.65;white-space:normal;overflow-wrap:anywhere;text-align:center}.nav .nav-icon{width:22px;height:22px;border-radius:8px}.nav .nav-icon svg{width:14px;height:14px}.billing-page-icon{width:38px;height:38px;border-radius:12px}.billing-page-icon svg{width:20px;height:20px}.billing-page-header{gap:11px}.billing-eyebrow{font-size:8px}.billing-panel-heading h2{font-size:15px}.billing-preview-badge{font-size:8px}.billing-lookup,.billing-summary{padding:20px}.billing-product{padding:12px}.billing-description{font-size:11px}}
+@media(max-width:600px){.nav .links{display:none}.billing-page-icon{width:38px;height:38px;border-radius:12px}.billing-page-icon svg{width:20px;height:20px}.billing-page-header{gap:11px}.billing-eyebrow{font-size:8px}.billing-panel-heading h2{font-size:15px}.billing-preview-badge{font-size:8px}.billing-lookup,.billing-summary{padding:20px}.billing-product{padding:12px}.billing-description{font-size:11px}}
 @media(max-width:360px){.nav .nav-in{padding-left:10px;padding-right:10px}.nav .brand{font-size:15px}.nav .brand img{width:33px;height:33px}.nav .lang-btn{padding:8px 11px;font-size:12px}.nav .nav-label{font-size:8px}.nav .links a{gap:3px}.billing-lookup,.billing-summary{padding:17px}.billing-preview-badge{padding:3px 5px}.billing-panel-heading{gap:8px}}
 @media(prefers-reduced-motion:reduce){.nav .links a,.nav .nav-icon{transition:none}.nav .links a:hover .nav-icon{transform:none}}
+
+/* Mobile bottom tab bar (wallet-app style) — replaces the top nav links on phones only. */
+.bottom-nav{display:none}
+@media(max-width:600px){
+  body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+  .bottom-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;gap:2px;padding:7px 5px calc(7px + env(safe-area-inset-bottom));background:rgba(255,255,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(37,99,235,.10)}
+  .bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 1px;border-radius:14px;text-decoration:none;color:var(--ink);min-width:0;text-align:center;transition:background .18s,box-shadow .18s}
+  .bottom-nav .nav-label{font-size:9px;font-weight:650;line-height:1.3;white-space:normal;overflow-wrap:anywhere}
+  .bottom-nav .nav-icon{display:grid;place-items:center;width:25px;height:25px;border-radius:10px;background:linear-gradient(145deg,#fff,#eaf1fb);box-shadow:inset 1.5px 1.5px 2px #fff,inset -2px -2px 3px #bdcce14d,1px 2px 0 #e1e9f4;color:#7b8da9;transition:transform .18s,color .18s,box-shadow .18s}
+  .bottom-nav .nav-icon svg{width:15px;height:15px}
+  .bottom-nav a.on{background:#e8f2ffd9;box-shadow:inset 1px 1px 2px #fff}
+  .bottom-nav a.on .nav-icon{color:#3371c5;background:linear-gradient(#f7fbff,#dceaff);box-shadow:inset 1px 1px 2px #fff,inset -2px -2px 3px #92b2e33b,1px 2px 0 #cbdcf3}
+  .bottom-nav a:active .nav-icon{transform:translateY(1px)}
+}
+@media(max-width:360px){.bottom-nav{padding:6px 3px calc(6px + env(safe-area-inset-bottom))}.bottom-nav .nav-label{font-size:8px}.bottom-nav .nav-icon{width:23px;height:23px}}
+@media(prefers-reduced-motion:reduce){.bottom-nav a,.bottom-nav .nav-icon{transition:none}}
 
 </style>
 </head>
@@ -1121,6 +1137,17 @@
     <div class="sf-bot"><span>&copy; <span id="ftYear">2026</span> Gamepay Hub. <span data-i="ftRights"></span></span><span><span data-i="ftDev"></span> <b class="dev">Diameter X</b></span></div>
   </footer>
 </main>
+
+<!-- Bottom tab bar: phones only (see .bottom-nav CSS). Same data-nav targets as the top nav, so the
+     existing [data-nav] active-state script keeps both in sync automatically. -->
+<nav class="bottom-nav" aria-label="Bottom navigation">
+  <a href="#" data-nav="home"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></svg></span><span class="nav-label" data-i="nav_home"></span></a>
+  <a href="#howto" data-nav="guide"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Z"/><path d="M12 5v15"/></svg></span><span class="nav-label" data-i="nav_guide"></span></a>
+  <a href="#faq" data-nav="faq"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 8.5a2.7 2.7 0 0 1 5 1c0 2-2.5 2-2.5 4M12 17h.01"/></svg></span><span class="nav-label" data-i="nav_faq"></span></a>
+  <a href="#pricing" data-nav="pricing"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h8l10 10-7 7L3 10Z"/><circle cx="7.5" cy="8" r="1"/></svg></span><span class="nav-label" data-i="nav_pricing"></span></a>
+  <a href="#billing" data-nav="billing"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2Z"/><path d="M9 7h6M9 11h6M9 15h3"/></svg></span><span class="nav-label" data-i="nav_billing"></span></a>
+  <a href="#redeem" data-nav="redeem"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="m12 12 8 8 2-2-2-2 1-1-2-2-1 1-3-3"/></svg></span><span class="nav-label" data-i="redeem"></span></a>
+</nav>
 
 <script>
 /* Our own API. The browser only ever sees these neutral paths (/api/v1/check,
