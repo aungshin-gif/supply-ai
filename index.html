@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <!-- After editing the script, run: node scripts/check-csp.cjs --update -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MBB9RJ+z1+QtGswQf3N82RAlxmqzz1NsL8oTXh7jRpY='; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src https://redeem.gamepayhub.shop; frame-src https://www.youtube-nocookie.com; media-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-4Etmz+wtghtRK0Mnzz0uSi8NbUiCnR2+6fU2PCvswYM='; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src https://redeem.gamepayhub.shop; frame-src https://www.youtube-nocookie.com; media-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="logos/gamepayhub.svg">
 <title>Gamepay Hub Redemption</title>
@@ -1094,9 +1094,6 @@
 </nav>
 
 <script>
-/* Our own API. The browser only ever sees these neutral paths (/api/v1/check,
-   /api/v1/redeem, /api/v1/order/:token); the relay on the VPS maps them to the
-   real supplier. No supplier name or host is exposed to the browser. */
 const BASE = 'https://redeem.gamepayhub.shop/api/v1';
 /* Support contacts. Add the WhatsApp number (digits only, with country code, e.g. '959123456789') to show its button. */
 const SUPPORT = { telegram:'angsthtun', whatsapp:'' };
@@ -2690,8 +2687,7 @@ let pollTimer = null;
 
 function setStep(n) { document.querySelectorAll('.steps i').forEach((el, i) => el.classList.toggle('on', i < n)); }
 
-/* ---- DEMO MODE: open the site with ?demo=1 to rehearse the whole flow with fake keys.
-   Nothing is sent to any supplier. Keys: DEMO-GPT, DEMO-CLAUDE, DEMO-GROK, DEMO-X, DEMO-FAIL (ends in failure), DEMO-USED. ---- */
+/* DEMO MODE (?demo=1): fake keys only, no network calls. */
 const DEMO = /[?&]demo=1(&|$)/.test(location.search);
 const DEMO_KEYS = { 'DEMO-GPT':'chatgpt', 'DEMO-CLAUDE':'claude', 'DEMO-GROK':'grok', 'DEMO-X':'x', 'DEMO-FAIL':'chatgpt' };
 let demoPolls = 0;
@@ -2945,10 +2941,7 @@ if (DEMO) {
 
 try { const lt = localStorage.getItem('lastToken'); if (lt) $('oldTok').value = lt; } catch {}
 
-/* ====================== keyed-channel keys via our relay ======================
-   The browser never talks to the supplier. It talks to YOUR relay (on the VPS),
-   which holds the API key. Set C2_API_BASE once the relay is live, e.g.
-   'https://relay.example.com/api/v1/c2'.  While it is empty, ChatGPT keys show "being set up". */
+/* While C2_API_BASE is empty, these keys show "being set up". */
 const C2_API_BASE = 'https://redeem.gamepayhub.shop/api/v1/c2';
 const C2_RE = /^(BP|PRO5|PRO20|PROMAX|GO)-/i;
 const PLAN_NAMES = { plus:'Plus', pro5:'Pro 5x', pro20:'Pro 20x', promax:'Pro Max', go:'Go' };
@@ -3098,9 +3091,7 @@ function c2Track(code, uncertain) {
   pollTimer = setTimeout(tick, 3000);
 }
 
-/* ====================== Plus Channel-1 keys (c3) via our relay ======================
-   Same idea as c2: the browser only talks to our relay. Activation is ONE synchronous call;
-   there is nothing to poll, and after any doubt we never send it again. */
+/* One synchronous call, nothing to poll; after any doubt never send it again. */
 const C3_API_BASE = 'https://redeem.gamepayhub.shop/api/v1/c3';
 async function c3Call(path, body) {
   const res = await fetch(C3_API_BASE + path, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
@@ -3370,10 +3361,7 @@ route();
   window.addEventListener('hashchange', () => setTimeout(() => { layout(); draw(); }, 0));
 })();
 
-/* ====================== Clone keys ("Your key") via our relay: /api/v2 ======================
-   The key the customer holds is a clone key. The real supplier key never reaches the browser.
-   The relay answers only { state, code, expiresAt }. After ANY doubt (timeout, uncertain) we only look at the status,
-   we never send the activation a second time. */
+/* After any doubt (timeout, uncertain) only check status; never send the activation a second time. */
 const PAIR_BASE = 'https://redeem.gamepayhub.shop/api/v2';
 const CLONE_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*-[a-z0-9]{8}$/i;
 let pairConfirm = null, pairTimer = null, pairSending = false;
