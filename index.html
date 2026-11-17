@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <!-- After editing the script, run: node scripts/check-csp.cjs --update -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-TTT/6/vobG39qzbjpSFwGkl1SR+nb7+UWuy/xyKV59I='; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src https://redeem.gamepayhub.shop; frame-src https://www.youtube-nocookie.com; media-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-gtfZW3gQX3hHV2rscbltJuR4IrgqVAAA6ocWGZTLfJE='; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src https://redeem.gamepayhub.shop; frame-src https://www.youtube-nocookie.com; media-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="logos/gamepayhub.svg">
 <title>Gamepay Hub Redemption</title>
@@ -782,6 +782,21 @@
 .ck-note{margin:0;font-size:12px;color:var(--mute);text-align:center}
 @media(max-width:520px){.ck-panel{padding:18px}.ck-icon{width:44px;height:44px;border-radius:14px}.ck-icon svg{width:24px;height:24px}}
 @media(prefers-reduced-motion:reduce){.ck-go{transition:none}}
+/* ChatGPT look for the checker card (same green as the Guide's ChatGPT panel) */
+.ck-panel{--ck:#10a37f;--ck-dark:#0b7a5f;--ck-soft:#effaf5;--ck-line:#cdeee1;border-top:4px solid var(--ck)}
+.ck-icon{background:#fff;box-shadow:inset 2px 2px 3px #fff,inset -3px -3px 6px #10a37f1f,2px 3px 0 #d4ebe2}
+.ck-icon img{width:32px;height:32px;object-fit:contain}
+.ck-eyebrow{color:var(--ck)}
+.ck-panel .ph{color:#0d0d0d}
+.ck-list li{background:var(--ck-soft);border-color:var(--ck-line)}
+.ck-list li span:first-child{background:var(--ck)}
+.ck-url{background:var(--ck-soft);border-color:var(--ck-line)}
+.ck-url .cpbtn{background:linear-gradient(180deg,#1fc196,var(--ck));box-shadow:0 4px 0 var(--ck-dark),inset 0 1px 1px #ffffff66}
+.ck-url .cpbtn:active{box-shadow:0 1px 0 var(--ck-dark)}
+.ck-go{background:linear-gradient(180deg,#1fc196,var(--ck));box-shadow:0 5px 0 var(--ck-dark),inset 0 2px 2px #ffffff55,0 12px 24px #10a37f33}
+.ck-go:active{box-shadow:0 1px 0 var(--ck-dark),inset 0 2px 2px #ffffff55}
+.ck-go:focus-visible{outline-color:#86e3c4}
+@media(max-width:520px){.ck-icon img{width:27px;height:27px}}
 
 </style>
 </head>
@@ -978,7 +993,7 @@
     <a class="back" href="#">&larr; <span data-i="back"></span></a>
     <section class="panel ck-panel" style="margin-top:14px">
       <div class="ck-head">
-        <span class="ck-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M12 2.4 4 5.5v6.1c0 4.8 3.4 8.6 8 10 4.6-1.4 8-5.2 8-10V5.5Z"/><path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m8.4 12 2.5 2.5 4.8-5"/></svg></span>
+        <span class="ck-icon" aria-hidden="true"><img src="logos/chatgpt.png" alt=""></span>
         <div><p class="ck-eyebrow" data-i="ckEyebrow"></p><h2 class="ph" data-i="ckT"></h2><p class="pri-sub" data-i="ckSub"></p></div>
       </div>
       <ul class="ck-list">
@@ -2556,13 +2571,13 @@ const GIFT_TEXT = {
 for (const [locale, strings] of Object.entries(GIFT_TEXT)) Object.assign(T[locale], strings);
 
 const CHECKER_TEXT = {
-  en: { nav_checker:'Checker', ckEyebrow:'Free tool', ckT:'Subscription Checker', ckSub:'See which plan your account is on and when it ends.', ck1:'Plan: Plus, Pro or Free', ck2:'Expiry date and days left', ck3:'Auto-renewal on or off', ckAddr:'Checker address', ckStart:'Start checking', ckNote:'Opens in a new tab. Never share your session with anyone else.' },
-  my: { nav_checker:'Checker', ckEyebrow:'အခမဲ့ tool', ckT:'Subscription Checker', ckSub:'ကိုယ့် account က ဘယ် plan လဲ၊ ဘယ်နေ့ကုန်မလဲ ကြည့်ပါ။', ck1:'Plan: Plus၊ Pro သို့မဟုတ် Free', ck2:'ကုန်ဆုံးမယ့်ရက်နဲ့ ကျန်ရက်', ck3:'Auto-renewal ဖွင့်/ပိတ်', ckAddr:'Checker လိပ်စာ', ckStart:'စစ်ဆေးမယ်', ckNote:'Tab အသစ်မှာ ဖွင့်ပါမယ်။ ကိုယ့် session ကို ဘယ်သူ့ကိုမှ မပေးပါနဲ့။' },
-  th: { nav_checker:'ตรวจสอบ', ckEyebrow:'เครื่องมือฟรี', ckT:'ตรวจสอบสมาชิก', ckSub:'ดูว่าบัญชีของคุณใช้แพ็กเกจใดและหมดอายุเมื่อใด', ck1:'แพ็กเกจ: Plus, Pro หรือ Free', ck2:'วันหมดอายุและจำนวนวันที่เหลือ', ck3:'ต่ออายุอัตโนมัติ เปิด/ปิด', ckAddr:'ที่อยู่เครื่องมือ', ckStart:'เริ่มตรวจสอบ', ckNote:'เปิดในแท็บใหม่ อย่าแชร์เซสชันของคุณกับผู้อื่น' },
-  de: { nav_checker:'Prüfen', ckEyebrow:'Kostenloses Tool', ckT:'Abo-Prüfer', ckSub:'Sieh nach, welchen Plan dein Konto hat und wann er endet.', ck1:'Plan: Plus, Pro oder Free', ck2:'Ablaufdatum und verbleibende Tage', ck3:'Automatische Verlängerung an oder aus', ckAddr:'Adresse des Prüfers', ckStart:'Prüfung starten', ckNote:'Öffnet sich in einem neuen Tab. Teile deine Sitzung mit niemandem.' },
-  fr: { nav_checker:'Vérifier', ckEyebrow:'Outil gratuit', ckT:'Vérificateur d’abonnement', ckSub:'Voyez quel forfait a votre compte et quand il se termine.', ck1:'Forfait : Plus, Pro ou Free', ck2:'Date d’expiration et jours restants', ck3:'Renouvellement automatique activé ou non', ckAddr:'Adresse du vérificateur', ckStart:'Lancer la vérification', ckNote:'S’ouvre dans un nouvel onglet. Ne partagez jamais votre session.' },
-  ja: { nav_checker:'チェッカー', ckEyebrow:'無料ツール', ckT:'サブスクチェッカー', ckSub:'アカウントのプランと終了日を確認できます。', ck1:'プラン：Plus・Pro・Free', ck2:'有効期限と残り日数', ck3:'自動更新のオン／オフ', ckAddr:'チェッカーのアドレス', ckStart:'チェックを開始', ckNote:'新しいタブで開きます。セッションは誰とも共有しないでください。' },
-  ko: { nav_checker:'체커', ckEyebrow:'무료 도구', ckT:'구독 체커', ckSub:'계정이 어떤 플랜인지, 언제 끝나는지 확인하세요.', ck1:'플랜: Plus, Pro 또는 Free', ck2:'만료일과 남은 일수', ck3:'자동 갱신 켜짐/꺼짐', ckAddr:'체커 주소', ckStart:'확인 시작', ckNote:'새 탭에서 열립니다. 세션은 누구와도 공유하지 마세요.' }
+  en: { nav_checker:'Checker', ckEyebrow:'ChatGPT · Free tool', ckT:'Subscription Checker', ckSub:'See which plan your account is on and when it ends.', ck1:'Plan: Plus, Pro or Free', ck2:'Expiry date and days left', ck3:'Auto-renewal on or off', ckAddr:'Checker address', ckStart:'Start checking', ckNote:'Opens in a new tab. Never share your session with anyone else.' },
+  my: { nav_checker:'Checker', ckEyebrow:'ChatGPT · အခမဲ့ tool', ckT:'Subscription Checker', ckSub:'ကိုယ့် account က ဘယ် plan လဲ၊ ဘယ်နေ့ကုန်မလဲ ကြည့်ပါ။', ck1:'Plan: Plus၊ Pro သို့မဟုတ် Free', ck2:'ကုန်ဆုံးမယ့်ရက်နဲ့ ကျန်ရက်', ck3:'Auto-renewal ဖွင့်/ပိတ်', ckAddr:'Checker လိပ်စာ', ckStart:'စစ်ဆေးမယ်', ckNote:'Tab အသစ်မှာ ဖွင့်ပါမယ်။ ကိုယ့် session ကို ဘယ်သူ့ကိုမှ မပေးပါနဲ့။' },
+  th: { nav_checker:'ตรวจสอบ', ckEyebrow:'ChatGPT · เครื่องมือฟรี', ckT:'ตรวจสอบสมาชิก', ckSub:'ดูว่าบัญชีของคุณใช้แพ็กเกจใดและหมดอายุเมื่อใด', ck1:'แพ็กเกจ: Plus, Pro หรือ Free', ck2:'วันหมดอายุและจำนวนวันที่เหลือ', ck3:'ต่ออายุอัตโนมัติ เปิด/ปิด', ckAddr:'ที่อยู่เครื่องมือ', ckStart:'เริ่มตรวจสอบ', ckNote:'เปิดในแท็บใหม่ อย่าแชร์เซสชันของคุณกับผู้อื่น' },
+  de: { nav_checker:'Prüfen', ckEyebrow:'ChatGPT · Kostenloses Tool', ckT:'Abo-Prüfer', ckSub:'Sieh nach, welchen Plan dein Konto hat und wann er endet.', ck1:'Plan: Plus, Pro oder Free', ck2:'Ablaufdatum und verbleibende Tage', ck3:'Automatische Verlängerung an oder aus', ckAddr:'Adresse des Prüfers', ckStart:'Prüfung starten', ckNote:'Öffnet sich in einem neuen Tab. Teile deine Sitzung mit niemandem.' },
+  fr: { nav_checker:'Vérifier', ckEyebrow:'ChatGPT · Outil gratuit', ckT:'Vérificateur d’abonnement', ckSub:'Voyez quel forfait a votre compte et quand il se termine.', ck1:'Forfait : Plus, Pro ou Free', ck2:'Date d’expiration et jours restants', ck3:'Renouvellement automatique activé ou non', ckAddr:'Adresse du vérificateur', ckStart:'Lancer la vérification', ckNote:'S’ouvre dans un nouvel onglet. Ne partagez jamais votre session.' },
+  ja: { nav_checker:'チェッカー', ckEyebrow:'ChatGPT · 無料ツール', ckT:'サブスクチェッカー', ckSub:'アカウントのプランと終了日を確認できます。', ck1:'プラン：Plus・Pro・Free', ck2:'有効期限と残り日数', ck3:'自動更新のオン／オフ', ckAddr:'チェッカーのアドレス', ckStart:'チェックを開始', ckNote:'新しいタブで開きます。セッションは誰とも共有しないでください。' },
+  ko: { nav_checker:'체커', ckEyebrow:'ChatGPT · 무료 도구', ckT:'구독 체커', ckSub:'계정이 어떤 플랜인지, 언제 끝나는지 확인하세요.', ck1:'플랜: Plus, Pro 또는 Free', ck2:'만료일과 남은 일수', ck3:'자동 갱신 켜짐/꺼짐', ckAddr:'체커 주소', ckStart:'확인 시작', ckNote:'새 탭에서 열립니다. 세션은 누구와도 공유하지 마세요.' }
 };
 for (const [locale, strings] of Object.entries(CHECKER_TEXT)) Object.assign(T[locale], strings);
 
