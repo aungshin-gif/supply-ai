@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <!-- After editing the script, run: node scripts/check-csp.cjs --update -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-4Etmz+wtghtRK0Mnzz0uSi8NbUiCnR2+6fU2PCvswYM='; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src https://redeem.gamepayhub.shop; frame-src https://www.youtube-nocookie.com; media-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-TTT/6/vobG39qzbjpSFwGkl1SR+nb7+UWuy/xyKV59I='; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src https://redeem.gamepayhub.shop; frame-src https://www.youtube-nocookie.com; media-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="logos/gamepayhub.svg">
 <title>Gamepay Hub Redemption</title>
@@ -758,6 +758,30 @@
 }
 @media(max-width:360px){.bottom-nav{gap:4px;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}.bottom-nav .nav-label{font-size:10px}.bottom-nav .nav-icon{width:31px;height:31px}.bottom-nav .nav-icon svg{width:17px;height:17px}}
 @media(prefers-reduced-motion:reduce){.bottom-nav a,.bottom-nav .nav-icon{transition:none}}
+/* six tabs on phones */
+@media(max-width:600px){.bottom-nav{gap:3px;padding-left:6px;padding-right:6px}.bottom-nav a{gap:4px;padding:8px 1px}.bottom-nav .nav-icon{width:31px;height:31px;border-radius:11px}.bottom-nav .nav-icon svg{width:17px;height:17px}.bottom-nav .nav-label{font-size:10px}}
+@media(max-width:360px){.bottom-nav{gap:2px;padding-left:3px;padding-right:3px}.bottom-nav .nav-icon{width:28px;height:28px}.bottom-nav .nav-icon svg{width:16px;height:16px}.bottom-nav .nav-label{font-size:9px}}
+
+/* Subscription Checker page */
+#viewChecker{max-width:640px;margin-inline:auto}
+.ck-panel{display:grid;gap:16px;padding:24px}
+.ck-head{display:flex;gap:14px;align-items:flex-start}
+.ck-head .ph{margin:2px 0 4px}
+.ck-icon{flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#fff,#e6effc);border:1px solid #fff;box-shadow:inset 2px 2px 3px #fff,inset -3px -3px 6px #bdcce166,2px 3px 0 #d6e2f3}
+.ck-icon svg{width:28px;height:28px}
+.ck-eyebrow{margin:0;font-size:11px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.ck-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ck-list li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--ice);border:1px solid var(--line);font-size:14.5px}
+.ck-list li span:first-child{flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
+.ck-label{margin:4px 0 -8px;font-size:12px;font-weight:700;color:var(--mute)}
+.ck-url{margin:0}
+.ck-go{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px 18px;border-radius:18px;text-decoration:none;font-weight:800;font-size:16px;color:#fff;background:linear-gradient(180deg,#4f8dff,#2563eb);box-shadow:0 5px 0 #1d4fbf,inset 0 2px 2px #ffffff55,0 12px 24px #2563eb33;transition:transform .12s,box-shadow .12s}
+.ck-go svg{width:18px;height:18px}
+.ck-go:active{transform:translateY(4px);box-shadow:0 1px 0 #1d4fbf,inset 0 2px 2px #ffffff55}
+.ck-go:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}
+.ck-note{margin:0;font-size:12px;color:var(--mute);text-align:center}
+@media(max-width:520px){.ck-panel{padding:18px}.ck-icon{width:44px;height:44px;border-radius:14px}.ck-icon svg{width:24px;height:24px}}
+@media(prefers-reduced-motion:reduce){.ck-go{transition:none}}
 
 </style>
 </head>
@@ -778,6 +802,7 @@
     <a href="#faq" data-nav="faq"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle fill="url(#navGrad)" cx="12" cy="12" r="9.3"/><path d="M9.3 9.7a2.9 2.9 0 0 1 5.4 1.1c0 1.7-1.5 2-2.2 3" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="17" r="1.1" fill="#fff"/></svg></span><span class="nav-label" data-i="nav_faq"></span></a>
     <a href="#pricing" data-nav="pricing"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M12.6 3.4 20 10.8a2 2 0 0 1 0 2.8l-6.4 6.4a2 2 0 0 1-2.8 0L3.4 12.6A2 2 0 0 1 2.8 11l.6-6a1.4 1.4 0 0 1 1.26-1.26l6-.6c.5-.05 1.03.1 1.4.46z"/><circle cx="7.8" cy="8" r="1.6" fill="#fff"/></svg></span><span class="nav-label" data-i="nav_pricing"></span></a>
     <a href="#billing" data-nav="billing"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M5.9 2.8h13a1 1 0 0 1 1 1V21l-2.9-2-2.3 1.6a1.4 1.4 0 0 1-1.6 0L10.8 19l-2.3 1.6a1.4 1.4 0 0 1-1.6 0L4 19v-.1l-.1-15.1a1 1 0 0 1 1-1z"/><path fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" d="M9 8h6M9 12h6M9 16h3"/></svg></span><span class="nav-label" data-i="nav_billing"></span></a>
+  <a href="#checker" data-nav="checker"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M12 2.4 4 5.5v6.1c0 4.8 3.4 8.6 8 10 4.6-1.4 8-5.2 8-10V5.5Z"/><path fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m8.4 12 2.5 2.5 4.8-5"/></svg></span><span class="nav-label" data-i="nav_checker"></span></a>
     <a href="#redeem" data-nav="redeem"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle fill="url(#navGrad)" cx="8" cy="8" r="5.3"/><path fill="url(#navGrad)" d="m11.6 11.6 8.8 8.8a1.4 1.4 0 0 0 2-2l-1.3-1.3 1-1-2-2-1 1-2.1-2.1z"/><circle cx="8" cy="8" r="2.1" fill="#eaf1fb"/></svg></span><span class="nav-label" data-i="redeem"></span></a>
   </nav>
   <div class="lang">
@@ -949,6 +974,25 @@
     </section>
   </div>
 
+  <div id="viewChecker" class="hidden">
+    <a class="back" href="#">&larr; <span data-i="back"></span></a>
+    <section class="panel ck-panel" style="margin-top:14px">
+      <div class="ck-head">
+        <span class="ck-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M12 2.4 4 5.5v6.1c0 4.8 3.4 8.6 8 10 4.6-1.4 8-5.2 8-10V5.5Z"/><path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m8.4 12 2.5 2.5 4.8-5"/></svg></span>
+        <div><p class="ck-eyebrow" data-i="ckEyebrow"></p><h2 class="ph" data-i="ckT"></h2><p class="pri-sub" data-i="ckSub"></p></div>
+      </div>
+      <ul class="ck-list">
+        <li><span aria-hidden="true">✓</span><span data-i="ck1"></span></li>
+        <li><span aria-hidden="true">✓</span><span data-i="ck2"></span></li>
+        <li><span aria-hidden="true">✓</span><span data-i="ck3"></span></li>
+      </ul>
+      <p class="ck-label" data-i="ckAddr"></p>
+      <div class="copyrow ck-url"><code>https://redeem.gamepayhub.shop/star</code><button type="button" class="cpbtn" data-copy="https://redeem.gamepayhub.shop/star" data-i="copy"></button></div>
+      <a class="ck-go" href="https://redeem.gamepayhub.shop/star" target="_blank" rel="noopener"><span data-i="ckStart"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+      <p class="ck-note" data-i="ckNote"></p>
+    </section>
+  </div>
+
   <div id="viewWarn" class="hidden">
     <a class="back" href="#" data-back>&larr; <span data-i="back"></span></a>
     <section class="panel wn" style="margin-top:14px">
@@ -1090,6 +1134,7 @@
   <a href="#howto" data-nav="guide"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M3 5.2c0-.7.6-1.2 1.3-1.1C6.6 4.4 9 5 11 6.4V19c-2-1.3-4.3-1.9-6.6-2.1A1.3 1.3 0 0 1 3 15.6V5.2z"/><path fill="url(#navGrad)" d="M21 5.2c0-.7-.6-1.2-1.3-1.1-2.3.3-4.7.9-6.7 2.3V19c2-1.3 4.3-1.9 6.6-2.1a1.3 1.3 0 0 0 1.4-1.3V5.2z"/></svg></span><span class="nav-label" data-i="nav_guide"></span></a>
   <a href="#pricing" data-nav="pricing"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M12.6 3.4 20 10.8a2 2 0 0 1 0 2.8l-6.4 6.4a2 2 0 0 1-2.8 0L3.4 12.6A2 2 0 0 1 2.8 11l.6-6a1.4 1.4 0 0 1 1.26-1.26l6-.6c.5-.05 1.03.1 1.4.46z"/><circle cx="7.8" cy="8" r="1.6" fill="#fff"/></svg></span><span class="nav-label" data-i="nav_pricing"></span></a>
   <a href="#billing" data-nav="billing"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M5.9 2.8h13a1 1 0 0 1 1 1V21l-2.9-2-2.3 1.6a1.4 1.4 0 0 1-1.6 0L10.8 19l-2.3 1.6a1.4 1.4 0 0 1-1.6 0L4 19v-.1l-.1-15.1a1 1 0 0 1 1-1z"/><path fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" d="M9 8h6M9 12h6M9 16h3"/></svg></span><span class="nav-label" data-i="nav_billing"></span></a>
+  <a href="#checker" data-nav="checker"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#navGrad)" d="M12 2.4 4 5.5v6.1c0 4.8 3.4 8.6 8 10 4.6-1.4 8-5.2 8-10V5.5Z"/><path fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m8.4 12 2.5 2.5 4.8-5"/></svg></span><span class="nav-label" data-i="nav_checker"></span></a>
   <a href="#redeem" data-nav="redeem"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle fill="url(#navGrad)" cx="8" cy="8" r="5.3"/><path fill="url(#navGrad)" d="m11.6 11.6 8.8 8.8a1.4 1.4 0 0 0 2-2l-1.3-1.3 1-1-2-2-1 1-2.1-2.1z"/><circle cx="8" cy="8" r="2.1" fill="#eaf1fb"/></svg></span><span class="nav-label" data-i="redeem"></span></a>
 </nav>
 
@@ -2510,6 +2555,17 @@ const GIFT_TEXT = {
 };
 for (const [locale, strings] of Object.entries(GIFT_TEXT)) Object.assign(T[locale], strings);
 
+const CHECKER_TEXT = {
+  en: { nav_checker:'Checker', ckEyebrow:'Free tool', ckT:'Subscription Checker', ckSub:'See which plan your account is on and when it ends.', ck1:'Plan: Plus, Pro or Free', ck2:'Expiry date and days left', ck3:'Auto-renewal on or off', ckAddr:'Checker address', ckStart:'Start checking', ckNote:'Opens in a new tab. Never share your session with anyone else.' },
+  my: { nav_checker:'Checker', ckEyebrow:'အခမဲ့ tool', ckT:'Subscription Checker', ckSub:'ကိုယ့် account က ဘယ် plan လဲ၊ ဘယ်နေ့ကုန်မလဲ ကြည့်ပါ။', ck1:'Plan: Plus၊ Pro သို့မဟုတ် Free', ck2:'ကုန်ဆုံးမယ့်ရက်နဲ့ ကျန်ရက်', ck3:'Auto-renewal ဖွင့်/ပိတ်', ckAddr:'Checker လိပ်စာ', ckStart:'စစ်ဆေးမယ်', ckNote:'Tab အသစ်မှာ ဖွင့်ပါမယ်။ ကိုယ့် session ကို ဘယ်သူ့ကိုမှ မပေးပါနဲ့။' },
+  th: { nav_checker:'ตรวจสอบ', ckEyebrow:'เครื่องมือฟรี', ckT:'ตรวจสอบสมาชิก', ckSub:'ดูว่าบัญชีของคุณใช้แพ็กเกจใดและหมดอายุเมื่อใด', ck1:'แพ็กเกจ: Plus, Pro หรือ Free', ck2:'วันหมดอายุและจำนวนวันที่เหลือ', ck3:'ต่ออายุอัตโนมัติ เปิด/ปิด', ckAddr:'ที่อยู่เครื่องมือ', ckStart:'เริ่มตรวจสอบ', ckNote:'เปิดในแท็บใหม่ อย่าแชร์เซสชันของคุณกับผู้อื่น' },
+  de: { nav_checker:'Prüfen', ckEyebrow:'Kostenloses Tool', ckT:'Abo-Prüfer', ckSub:'Sieh nach, welchen Plan dein Konto hat und wann er endet.', ck1:'Plan: Plus, Pro oder Free', ck2:'Ablaufdatum und verbleibende Tage', ck3:'Automatische Verlängerung an oder aus', ckAddr:'Adresse des Prüfers', ckStart:'Prüfung starten', ckNote:'Öffnet sich in einem neuen Tab. Teile deine Sitzung mit niemandem.' },
+  fr: { nav_checker:'Vérifier', ckEyebrow:'Outil gratuit', ckT:'Vérificateur d’abonnement', ckSub:'Voyez quel forfait a votre compte et quand il se termine.', ck1:'Forfait : Plus, Pro ou Free', ck2:'Date d’expiration et jours restants', ck3:'Renouvellement automatique activé ou non', ckAddr:'Adresse du vérificateur', ckStart:'Lancer la vérification', ckNote:'S’ouvre dans un nouvel onglet. Ne partagez jamais votre session.' },
+  ja: { nav_checker:'チェッカー', ckEyebrow:'無料ツール', ckT:'サブスクチェッカー', ckSub:'アカウントのプランと終了日を確認できます。', ck1:'プラン：Plus・Pro・Free', ck2:'有効期限と残り日数', ck3:'自動更新のオン／オフ', ckAddr:'チェッカーのアドレス', ckStart:'チェックを開始', ckNote:'新しいタブで開きます。セッションは誰とも共有しないでください。' },
+  ko: { nav_checker:'체커', ckEyebrow:'무료 도구', ckT:'구독 체커', ckSub:'계정이 어떤 플랜인지, 언제 끝나는지 확인하세요.', ck1:'플랜: Plus, Pro 또는 Free', ck2:'만료일과 남은 일수', ck3:'자동 갱신 켜짐/꺼짐', ckAddr:'체커 주소', ckStart:'확인 시작', ckNote:'새 탭에서 열립니다. 세션은 누구와도 공유하지 마세요.' }
+};
+for (const [locale, strings] of Object.entries(CHECKER_TEXT)) Object.assign(T[locale], strings);
+
 const LANGS = [
   ['en','English','EN'], ['my','မြန်မာ','MY'], ['th','ไทย','TH'], ['de','Deutsch','DE'],
   ['fr','Français','FR'], ['ja','日本語','JA'], ['ko','한국어','KO']
@@ -3317,15 +3373,16 @@ function renderLegal() {
 try { $('ftYear').textContent = new Date().getFullYear(); } catch (e) {}
 function route() {
   const gate = location.hash === '#redeem' && !warnOk;
-  const h = location.hash, onRedeem = h === '#redeem', onPricing = h === '#pricing', onGuide = h === '#howto', onBilling = h === '#billing', onLegal = ['#terms','#privacy','#refund'].includes(h), anchor = ['#guide','#faq','#support'].includes(h);
-  $('viewWelcome').classList.toggle('hidden', onRedeem || onPricing || onGuide || onLegal || onBilling);
+  const h = location.hash, onRedeem = h === '#redeem', onPricing = h === '#pricing', onGuide = h === '#howto', onBilling = h === '#billing', onChecker = h === '#checker', onLegal = ['#terms','#privacy','#refund'].includes(h), anchor = ['#guide','#faq','#support'].includes(h);
+  $('viewWelcome').classList.toggle('hidden', onRedeem || onPricing || onGuide || onLegal || onBilling || onChecker);
+  $('viewChecker').classList.toggle('hidden', !onChecker);
   $('viewLegal').classList.toggle('hidden', !onLegal); if (onLegal) renderLegal();
   $('viewRedeem').classList.toggle('hidden', !onRedeem || gate);
   $('viewWarn').classList.toggle('hidden', !gate);
   $('viewPricing').classList.toggle('hidden', !onPricing);
   $('viewGuide').classList.toggle('hidden', !onGuide);
   $('viewBilling').classList.toggle('hidden', !onBilling);
-  const cur = onRedeem ? 'redeem' : onPricing ? 'pricing' : onGuide ? 'guide' : onBilling ? 'billing' : (anchor ? h.slice(1) : 'home');
+  const cur = onRedeem ? 'redeem' : onPricing ? 'pricing' : onGuide ? 'guide' : onBilling ? 'billing' : onChecker ? 'checker' : (anchor ? h.slice(1) : 'home');
   document.querySelectorAll('[data-nav]').forEach(a => { const current = a.dataset.nav === cur; a.classList.toggle('on', current); if (current) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   if (anchor) { const g = $(h.slice(1)); if (g) { g.classList.add('in'); g.scrollIntoView({ behavior:'smooth', block:'start' }); } } else window.scrollTo({ top:0, behavior:'instant' });
 }
